@@ -46,6 +46,15 @@ allprojects {
     group = "io.insert-koin"
     version = koinVersion
 
+    configurations.all {
+        resolutionStrategy.force(
+            "org.jetbrains.kotlin:kotlin-stdlib-common:2.2.10",
+            "org.jetbrains.kotlin:kotlin-stdlib:2.2.10",
+            "org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.2.10",
+            "org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.2.10"
+        )
+    }
+
     apply(plugin = "org.jetbrains.dokka")
     val dokkaHtml by tasks.getting(org.jetbrains.dokka.gradle.DokkaTask::class)
     val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {

@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinMultiplatform)
@@ -9,15 +11,26 @@ version = koinVersion
 kotlin {
     androidTarget {
         publishLibraryVariants("release")
-        compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_1_8)
         }
     }
     
     jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "11"
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
         }
+    }
+
+    js(IR) {
+        nodejs()
+        browser()
+        binaries.executable()
+    }
+
+    wasmJs {
+        nodejs()
+        binaries.executable()
     }
 
 //    // Enable context receivers for all targets
@@ -29,22 +42,12 @@ kotlin {
 //        }
 //    }
 
-    js(IR) {
-        nodejs()
-        browser()
-        binaries.executable()
-    }
-
-    wasmJs {
-        binaries.executable()
-        nodejs()
-    }
-
     iosX64()
     iosArm64()
     iosSimulatorArm64()
     macosX64()
     macosArm64()
+    linuxArm64()
 
     sourceSets {
         commonMain.dependencies {

@@ -1,6 +1,8 @@
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 pluginManagement {
     repositories {
+        // mavenLocal first for forked compose plugin with linuxArm64 support
+        mavenLocal()
         google {
             mavenContent {
                 includeGroupByRegex(".*google.*")
@@ -14,6 +16,8 @@ pluginManagement {
 
 dependencyResolutionManagement {
     repositories {
+        // mavenLocal first for forked compose libs with linuxArm64 support
+        mavenLocal()
         google {
             mavenContent {
                 includeGroupByRegex(".*google.*")

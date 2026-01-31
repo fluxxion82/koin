@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinMultiplatform)
@@ -11,14 +13,14 @@ version = koinVersion
 kotlin {
     androidTarget {
         publishLibraryVariants("release")
-        compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_1_8)
         }
     }
 
     jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "11"
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
         }
     }
 
@@ -38,21 +40,17 @@ kotlin {
     iosSimulatorArm64()
     macosX64()
     macosArm64()
+    linuxArm64()
 
     sourceSets {
         commonMain.dependencies {
+            api("org.jetbrains.kotlin:kotlin-stdlib-common:2.2.10")
             api(project(":core:koin-core"))
             api(libs.jb.composeRuntime)
             api(libs.jb.composeFoundation)
         }
         androidMain.dependencies {
             api(project(":android:koin-android"))
-        }
-        nativeMain.dependencies {
-        }
-        wasmJsMain.dependencies {
-        }
-        jsMain.dependencies {
         }
     }
 }
@@ -74,6 +72,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask>().configureEach {
+    args.add("--ignore-engines")
 }
 
 apply(from = file("../../gradle/publish.gradle.kts"))
