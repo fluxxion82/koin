@@ -15,10 +15,14 @@ kotlin {
         binaries.executable()
     }
 
+    wasmJs {
+        nodejs()
+        binaries.executable()
+    }
+
     iosX64()
     iosArm64()
     iosSimulatorArm64()
-    macosX64()
     macosArm64()
     watchosArm32()
     watchosArm64()

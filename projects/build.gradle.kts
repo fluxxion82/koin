@@ -46,6 +46,15 @@ allprojects {
     group = "io.insert-koin"
     version = koinVersion
 
+    configurations.all {
+        resolutionStrategy.force(
+            "org.jetbrains.kotlin:kotlin-stdlib-common:2.4.20",
+            "org.jetbrains.kotlin:kotlin-stdlib:2.4.20",
+            "org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.4.20",
+            "org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.4.20"
+        )
+    }
+
     apply(plugin = "org.jetbrains.dokka")
     val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
         dependsOn("dokkaGeneratePublicationHtml")

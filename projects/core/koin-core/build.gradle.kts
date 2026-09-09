@@ -39,6 +39,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(kotlin("stdlib-common"))
             implementation(libs.extras.stately)
             implementation(libs.extras.stately.collections)
 //            api(libs.extras.uuid)
@@ -47,9 +48,9 @@ kotlin {
             implementation(libs.kotlin.test)
             implementation(libs.test.coroutines)
         }
-//        wasmJsMain.dependencies {
-//            implementation(libs.uuid)
-//        }
+        wasmJsMain.dependencies {
+            implementation(libs.uuid)
+        }
     }
 }
 

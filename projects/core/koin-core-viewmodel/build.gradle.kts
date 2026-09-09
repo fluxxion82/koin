@@ -22,6 +22,17 @@ kotlin {
         }
     }
 
+    js(IR) {
+        nodejs()
+        browser()
+        binaries.executable()
+    }
+
+    wasmJs {
+        nodejs()
+        binaries.executable()
+    }
+
 //    // Enable context receivers for all targets
 //    targets.all {
 //        compilations.all {
@@ -31,25 +42,12 @@ kotlin {
 //        }
 //    }
 
-    js(IR) {
-        nodejs()
-        browser()
-        binaries.executable()
-    }
-
-    wasmJs {
-        binaries.executable()
-        nodejs()
-    }
-
     iosX64()
     iosArm64()
     iosSimulatorArm64()
     macosX64()
     macosArm64()
-    tvosArm64()
-    tvosSimulatorArm64()
-    tvosX64()
+    linuxArm64()
 
     sourceSets {
         commonMain.dependencies {
